@@ -35,8 +35,12 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'], headless: false },
+      use: {
+  headless: !!process.env.CI,
+  // keep your other settings here
+},
+      // name: 'chromium',
+      // use: { ...devices['Desktop Chrome'], headless: false },
     },
 
     // {
