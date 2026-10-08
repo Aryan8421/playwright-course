@@ -12,7 +12,7 @@ test.describe('Upload file ', () => {
         const filePath = path.join(__dirname, '../data/logotitle.png');
 
     //upload test file
-    await page.setInputFiles('input#upfile_1',filePath); n
+    await page.setInputFiles('input#upfile_1',filePath);
 
     //click the submit button
         await page.locator('#upload_1').click();
