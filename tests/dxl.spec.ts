@@ -44,6 +44,13 @@
 
 import { test, expect } from '@playwright/test';
 
+// Apply this browser setting to tests in this file only
+test.use({
+    launchOptions: {
+        args: ['--disable-http2']
+    }
+});
+
 test.describe('Login DXL.com', () => {
     test('Login the DXL', async ({ page }) => {
 
