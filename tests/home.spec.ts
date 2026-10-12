@@ -1,94 +1,147 @@
-import {test, expect} from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 test.describe('Home', () => {
-    test('Open Homepage and verify title', async ({ page }) => {
-        //open the url 
-        await page.goto('https://practice.sdetunicorns.com/');
+
+    test('Open homapage and verify title', async ({ page }) => {
+        //open the URL
+        await page.goto("https://practice.sdetunicorns.com/");
 
         //verify title
-        await expect(page).toHaveTitle("Practice E-Commerce Site – SDET Unicorns")
+        await expect(page).toHaveTitle("Practice E-Commerce Site – SDET Unicorns");
+    })
+    test('Open About page and verify title', async ({ page }) => {
 
-    });
+        //Open about page
+        await page.goto("https://practice.sdetunicorns.com/about/")
 
-    test('Open about page and verify title', async ({ page }) => {
-
-     //await page.goto('https://practice.sdetunicorns.com/about/');
-
-        await page.getByRole('link', { name: 'About' })
-
+        //Verify title
         await expect(page).toHaveTitle("About – Practice E-Commerce Site")
 
-    });
-    test('Click get started using CSS selectors', async ({ page }) => {
+    })
 
-     await page.goto('https://practice.sdetunicorns.com');
+    test('click on the get started button and verify the url', async ({ page }) => {
+        //open the URL
+        await page.goto("https://practice.sdetunicorns.com/")
 
-    //click the button
-    await page.locator('#get-started').click();
+        //Click on the get-started Button
+        await page.locator("#get-started").click()
 
-        //verify the url #egt-started
-        await expect(page).toHaveURL(/.*get-started/)
-  
-    });
-    
-test('Verify Heading Text using Text Selector', async ({ page }) => {
+        //verify the URL #get-started //used RegExp here insted of the whole url RegExp(/.*/)
+        await expect(page).toHaveURL(/.*#get-started/)
 
-     await page.goto('https://practice.sdetunicorns.com');
+    })
 
-    //Fine the text locator
-    const headingText = page.locator('text=Think different. Make different.')
+    test('Verify the heading text is visible using the text selector', async ({ page }) => {
+        //open the URL
+        await page.goto("https://practice.sdetunicorns.com/")
+
+        //find the text selector
+        const headingText = page.locator('text=Think different. Make different.')
+
 
         //verify heading text is visible
         await expect(headingText).toBeVisible();
-  
-    });
-    test('Verify Home link is enabled using test and css selector', async ({ page }) => {
 
-     await page.goto('https://practice.sdetunicorns.com');
+    })
 
-    //Find the Home text
-    //const homeText = await page.locator('#zak-primary-menu >> text=Home')
-        const homeText = page.locator('#zak-primary-menu:has-text("Home")')
+    test('Verify Home link is enabled using text and CSS selector', async ({ page }) => {
 
-        //verify home text is enabled
-        await expect(homeText).toBeEnabled();
-  
-    });
+        await page.goto("https://practice.sdetunicorns.com/");
 
-    test('Verify serch icon is visible using css xpath selector', async ({ page }) => {
+        //find the home text
+        const hometext = page.locator('#zak-primary-menu >> text=Home')
 
-     await page.goto('https://practice.sdetunicorns.com');
+        //verify homeText is enabled
+        await expect(hometext).toBeEnabled();
 
-    //Find the serch icon
-        const serchIcon = page.locator("//div[@class='zak-header-actions zak-header-actions--desktop']//a[@class='zak-header-search__toggle']");
+    })
 
-        //verify SerchIcon is visible
-        await expect(serchIcon).toBeVisible();
-  
-    });
+    test('Verify the serch icon is visible using xpath selector', async ({ page }) => {
 
-    test('verify test for all vav link', async ({ page }) => {
+        await page.goto("https://practice.sdetunicorns.com/")
+
+        // fidn the serch icoe
+        const searchIcon = page.locator("//div[@class='zak-header-actions zak-header-actions--desktop']//a[@class='zak-header-search__toggle']");
+
+        //verify search icon is visible
+        await expect(searchIcon).toBeVisible();
+
+    })
+
+    test('Verify text for all Nav Link', async ({ page }) => {
+
         const expectedLinks = [
-      "Home",
-      "About",
-      "Shop",
-      "Blog",
-      "Contact",
-      "My account",
-    ];
-        // open url
-        await page.goto('https://practice.sdetunicorns.com');
+            "Home",
+            "About",
+            "Shop",
+            "Blog",
+            "Contact",
+            "My account",
+        ];
 
-        //find the nav link
-        const navLinks = page.locator('#zak-primary-menu li[id*=menu]')
+        await page.goto("https://practice.sdetunicorns.com/")
 
-        //print out all the link
-       for (const el of await navLinks.elementHandles()) {
-        console.log(await el.textContent());
-       }
-        //verify nav link text 
+        // fild the nav links
+        const navLinks = page.locator('#zak-primary-nav li[id*=menu]')
+
+        //Verify navLinks Text
         expect(await navLinks.allTextContents()).toEqual(expectedLinks);
-        //expect(await navLinks.textContent()).toEqual(expectedLinks[3]);
+
+
+    })
+
+
+    //same as above but here we are checking Nth Locator
+    test('Vrify NTH locator', async ({ page }) => {
+
+        const expectedLinks = [
+            "Home",
+            "About",
+            "Shop",
+            "Blog",
+            "Contact",
+            "My account",
+        ];
+
+        await page.goto("https://practice.sdetunicorns.com/")
+
+        // fild the Nth Locator
+        const navLinks = page.locator('#zak-primary-nav li[id*=menu]').nth(3);
+
+        //Verify navLinks Text
+        expect(await navLinks.textContent()).toEqual(expectedLinks[3]);
+
         
-    }) 
-});
+    })
+
+     test('Verify locatoer and the using for loop print it', async ({ page }) => {
+
+        const expectedLinks = [
+            "Home",
+            "About",
+            "Shop",
+            "Blog",
+            "Contact",
+            "My account",
+        ];
+
+        await page.goto("https://practice.sdetunicorns.com/")
+
+        // fild the Nth Locator
+        const navLinks = page.locator('#zak-primary-nav li[id*=menu]')
+
+        //fot loop and print the elemnets 
+        for (const el of await navLinks.elementHandles()) {
+            console.log(await el.textContent());
+            
+        }
+
+        //Verify navLinks Text
+        expect(await navLinks.allTextContents()).toEqual(expectedLinks);
+
+     })
+
+})
+
+
+

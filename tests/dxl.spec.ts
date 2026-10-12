@@ -20,15 +20,13 @@ test.describe('Login DXL.com', () => {
 
         await page.locator('#username').fill('ajio@yopmail.com');
 
-        await page.locator("button[class='c3e773acf cc4752a31 cbf1ac32b c0686068e _button-login-id']").click();
+        await page.locator('[data-action-button-primary="true"]').click();
 
         await page.locator('#password').fill('ajio123');
 
         await page.locator("button[value='default']").click();
 
-        
-
-
+    
         
     })
     

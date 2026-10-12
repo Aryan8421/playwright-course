@@ -20,9 +20,7 @@ export default defineConfig({
   workers: isCI ? 1 : undefined,
 
   reporter: [
-    ['html'],
-    ['github']
-  ],
+    ['html'],['github']],
 
   use: {
     trace: 'on-first-retry',
@@ -50,21 +48,21 @@ export default defineConfig({
         },
 
         // Local → Firefox
-        {
-          name: 'firefox',
-          use: {
-            ...devices['Desktop Firefox'],
-            headless: false,
-          },
-        },
+        // {
+        //   name: 'firefox',
+        //   use: {
+        //     ...devices['Desktop Firefox'],
+        //     headless: false,
+        //   },
+        // },
 
-        // Local → WebKit
-        {
-          name: 'webkit',
-          use: {
-            ...devices['Desktop Safari'],
-            headless: false,
-          },
-        },
+        // // Local → WebKit
+        // {
+        //   name: 'webkit',
+        //   use: {
+        //     ...devices['Desktop Safari'],
+        //     headless: false,
+        //   },
+        // },
       ],
 });
