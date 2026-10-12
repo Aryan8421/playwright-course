@@ -7,7 +7,7 @@ test.describe('Login DXL.com', () => {
         try {
             await page.goto('https://www.dxl.com/', {
                 waitUntil: 'domcontentloaded',
-                timeout: 60000
+                timeout: 90000
             });
         } catch (error) {
             console.log('DXL site not reachable');
