@@ -1,14 +1,16 @@
-class HomePage {
-    page: any;
-    getstartedBtn: any;
-    headingText: any;
-    homeLink: any;
-    searchIcon: any;
-    navLinks: any;
+import {Page, Locator} from '@playwright/test';
 
-    constructor(page) {
+class HomePage {
+    page: Page;
+    getstartedBtn: Locator;
+    headingText: Locator;
+    homeLink: Locator;
+    searchIcon: Locator;
+    navLinks: Locator;
+
+    constructor(page: Page) {
         this.page = page;
-        this.getstartedBtn = page.locator("#get-started").click()
+        this.getstartedBtn = page.locator("#get-started")
         this.headingText =page.locator('text=Think different. Make different.')
         this.homeLink = page.locator('#zak-primary-menu >> text=Home')
         this.searchIcon = page.locator("//div[@class='zak-header-actions zak-header-actions--desktop']//a[@class='zak-header-search__toggle']");

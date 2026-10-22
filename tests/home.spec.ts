@@ -33,7 +33,7 @@ test.describe('Home', () => {
 
         //Click on the get-started Button
         // await page.locator("#get-started").click()
-        await homePage.getstartedBtn
+        await homePage.getstartedBtn.click();
 
         //verify the URL #get-started //used RegExp here insted of the whole url RegExp(/.*/)
         await expect(page).toHaveURL(/.*#get-started/);
