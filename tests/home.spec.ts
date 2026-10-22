@@ -1,8 +1,13 @@
 import { test, expect } from '@playwright/test';
+import HomePage from '../Pages/home.page';
 
 test.describe('Home', () => {
+    let homePage;
 
-    test('Open homapage and verify title', async ({ page }) => {
+    test('Open homapage and verify title', async ({ page }) => {  
+
+    homePage = new HomePage(page);
+
         //open the URL
         await page.goto("https://practice.sdetunicorns.com/");
 
@@ -20,23 +25,32 @@ test.describe('Home', () => {
     })
 
     test('click on the get started button and verify the url', async ({ page }) => {
+    homePage = new HomePage(page);
+
+
         //open the URL
         await page.goto("https://practice.sdetunicorns.com/")
 
         //Click on the get-started Button
-        await page.locator("#get-started").click()
+        // await page.locator("#get-started").click()
+        await homePage.getstartedBtn
 
         //verify the URL #get-started //used RegExp here insted of the whole url RegExp(/.*/)
-        await expect(page).toHaveURL(/.*#get-started/)
+        await expect(page).toHaveURL(/.*#get-started/);
+        
 
     })
 
     test('Verify the heading text is visible using the text selector', async ({ page }) => {
+    homePage = new HomePage(page);
+
+
         //open the URL
         await page.goto("https://practice.sdetunicorns.com/")
 
         //find the text selector
-        const headingText = page.locator('text=Think different. Make different.')
+        // const headingText = page.locator('text=Think different. Make different.')
+        const headingText = await homePage.headingText
 
 
         //verify heading text is visible
@@ -45,11 +59,14 @@ test.describe('Home', () => {
     })
 
     test('Verify Home link is enabled using text and CSS selector', async ({ page }) => {
+            homePage = new HomePage(page);
+
 
         await page.goto("https://practice.sdetunicorns.com/");
 
         //find the home text
-        const hometext = page.locator('#zak-primary-menu >> text=Home')
+        // const hometext = page.locator('#zak-primary-menu >> text=Home')
+        const hometext = await homePage.homeLink
 
         //verify homeText is enabled
         await expect(hometext).toBeEnabled();
@@ -58,10 +75,14 @@ test.describe('Home', () => {
 
     test('Verify the serch icon is visible using xpath selector', async ({ page }) => {
 
+            homePage = new HomePage(page);
+
+
         await page.goto("https://practice.sdetunicorns.com/")
 
         // fidn the serch icoe
-        const searchIcon = page.locator("//div[@class='zak-header-actions zak-header-actions--desktop']//a[@class='zak-header-search__toggle']");
+        // const searchIcon = page.locator("//div[@class='zak-header-actions zak-header-actions--desktop']//a[@class='zak-header-search__toggle']");
+        const searchIcon = await homePage.searchIcon
 
         //verify search icon is visible
         await expect(searchIcon).toBeVisible();
@@ -69,6 +90,8 @@ test.describe('Home', () => {
     })
 
     test('Verify text for all Nav Link', async ({ page }) => {
+            homePage = new HomePage(page);
+
 
         const expectedLinks = [
             "Home",
@@ -82,7 +105,8 @@ test.describe('Home', () => {
         await page.goto("https://practice.sdetunicorns.com/")
 
         // fild the nav links
-        const navLinks = page.locator('#zak-primary-nav li[id*=menu]')
+        // const navLinks = page.locator('#zak-primary-nav li[id*=menu]')
+        const navLinks = await homePage.navLinks
 
         //Verify navLinks Text
         expect(await navLinks.allTextContents()).toEqual(expectedLinks);

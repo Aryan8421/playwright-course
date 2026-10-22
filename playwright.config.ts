@@ -1,3 +1,4 @@
+
 import { defineConfig, devices } from '@playwright/test';
 
 const isCI = !!process.env.CI;
@@ -20,15 +21,16 @@ export default defineConfig({
   workers: isCI ? 1 : undefined,
 
   reporter: [
-    ['html'],['github']],
+    ['html'],
+    ['github'],
+  ],
 
   use: {
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
   },
 
   projects: isCI
     ? [
-        // CI → Chromium only
         {
           name: 'chromium',
           use: {
@@ -38,7 +40,6 @@ export default defineConfig({
         },
       ]
     : [
-        // Local → Chromium
         {
           name: 'chromium',
           use: {
@@ -47,7 +48,7 @@ export default defineConfig({
           },
         },
 
-        // Local → Firefox
+        // Firefox can be enabled when needed.
         // {
         //   name: 'firefox',
         //   use: {
@@ -56,7 +57,7 @@ export default defineConfig({
         //   },
         // },
 
-        // // Local → WebKit
+        // WebKit can be enabled when needed.
         // {
         //   name: 'webkit',
         //   use: {
