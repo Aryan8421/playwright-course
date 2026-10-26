@@ -2,14 +2,15 @@ import { test, expect } from '@playwright/test';
 import HomePage from '../Pages/home.page';
 
 test.describe('Home', () => {
-    let homePage;
+    let homePage: HomePage;
 
     test('Open homapage and verify title', async ({ page }) => {  
 
     homePage = new HomePage(page);
 
         //open the URL
-        await page.goto("https://practice.sdetunicorns.com/");
+        // await page.goto("https://practice.sdetunicorns.com/");
+        await homePage.navigate()
 
         //verify title
         await expect(page).toHaveTitle("Practice E-Commerce Site – SDET Unicorns");
@@ -29,11 +30,12 @@ test.describe('Home', () => {
 
 
         //open the URL
-        await page.goto("https://practice.sdetunicorns.com/")
+        await homePage.navigate()
 
         //Click on the get-started Button
         // await page.locator("#get-started").click()
         await homePage.getstartedBtn.click();
+    
 
         //verify the URL #get-started //used RegExp here insted of the whole url RegExp(/.*/)
         await expect(page).toHaveURL(/.*#get-started/);
@@ -46,7 +48,7 @@ test.describe('Home', () => {
 
 
         //open the URL
-        await page.goto("https://practice.sdetunicorns.com/")
+        await homePage.navigate()
 
         //find the text selector
         // const headingText = page.locator('text=Think different. Make different.')
@@ -62,7 +64,7 @@ test.describe('Home', () => {
             homePage = new HomePage(page);
 
 
-        await page.goto("https://practice.sdetunicorns.com/");
+        await homePage.navigate()
 
         //find the home text
         // const hometext = page.locator('#zak-primary-menu >> text=Home')
@@ -78,7 +80,7 @@ test.describe('Home', () => {
             homePage = new HomePage(page);
 
 
-        await page.goto("https://practice.sdetunicorns.com/")
+        await homePage.navigate()
 
         // fidn the serch icoe
         // const searchIcon = page.locator("//div[@class='zak-header-actions zak-header-actions--desktop']//a[@class='zak-header-search__toggle']");
@@ -102,14 +104,14 @@ test.describe('Home', () => {
             "My account",
         ];
 
-        await page.goto("https://practice.sdetunicorns.com/")
+        await homePage.navigate()
 
         // fild the nav links
         // const navLinks = page.locator('#zak-primary-nav li[id*=menu]')
-        const navLinks = await homePage.navLinks
+        // const navLinks = await homePage.navLinks
 
         //Verify navLinks Text
-        expect(await navLinks.allTextContents()).toEqual(expectedLinks);
+        expect(await homePage.getNavLinkText()).toEqual(expectedLinks);
 
 
     })
@@ -127,7 +129,7 @@ test.describe('Home', () => {
             "My account",
         ];
 
-        await page.goto("https://practice.sdetunicorns.com/")
+        await homePage.navigate()
 
         // fild the Nth Locator
         const navLinks = page.locator('#zak-primary-nav li[id*=menu]').nth(3);
@@ -149,7 +151,7 @@ test.describe('Home', () => {
             "My account",
         ];
 
-        await page.goto("https://practice.sdetunicorns.com/")
+        await homePage.navigate()
 
         // fild the Nth Locator
         const navLinks = page.locator('#zak-primary-nav li[id*=menu]')
@@ -162,7 +164,7 @@ test.describe('Home', () => {
 
         //Verify navLinks Text
         expect(await navLinks.allTextContents()).toEqual(expectedLinks);
-
+ 
      })
 
 })
