@@ -119,6 +119,8 @@ test.describe('Home', () => {
 
     //same as above but here we are checking Nth Locator
     test('Vrify NTH locator', async ({ page }) => {
+        homePage = new HomePage(page);
+        
 
         const expectedLinks = [
             "Home",
@@ -141,6 +143,7 @@ test.describe('Home', () => {
     })
 
      test('Verify locatoer and the using for loop print it', async ({ page }) => {
+        homePage = new HomePage(page);
 
         const expectedLinks = [
             "Home",
