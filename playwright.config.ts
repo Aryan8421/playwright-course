@@ -26,6 +26,7 @@ export default defineConfig({
   ],
 
   use: {
+    baseURL: 'https://practice.sdetunicorns.com/',
     trace: 'retain-on-failure',
   },
 
@@ -47,23 +48,5 @@ export default defineConfig({
             headless: false,
           },
         },
-
-        // Firefox can be enabled when needed.
-        // {
-        //   name: 'firefox',
-        //   use: {
-        //     ...devices['Desktop Firefox'],
-        //     headless: false,
-        //   },
-        // },
-
-        // WebKit can be enabled when needed.
-        // {
-        //   name: 'webkit',
-        //   use: {
-        //     ...devices['Desktop Safari'],
-        //     headless: false,
-        //   },
-        // },
       ],
 });

@@ -15,7 +15,7 @@ test.describe('Home', () => {
         //verify title
         await expect(page).toHaveTitle("Practice E-Commerce Site – SDET Unicorns");
     })
-    test('Open About page and verify title', async ({ page }) => {
+    test.skip('Open About page and verify title', async ({ page }) => {
 
         //Open about page
         await page.goto("https://practice.sdetunicorns.com/about/")

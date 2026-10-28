@@ -3,7 +3,7 @@ import { Page } from '@playwright/test';
 
 class BlogPage {
     private page: Page;
-    recentPostList: import("playwright-core").Locator;
+    recentPostList: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -13,7 +13,7 @@ class BlogPage {
 
     async navigate(){
 
-        await this.page.goto('https://practice.sdetunicorns.com/blog/');
+        await this.page.goto('/blog');
     }
 
 }

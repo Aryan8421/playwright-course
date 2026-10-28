@@ -9,7 +9,7 @@ test.describe('Blog', () => {
         blogPage = new BlogPage(page);
 
         //open the url
-        // await page.goto('https://practice.sdetunicorns.com/blog/');
+        // await page.goto('/blog');
         await blogPage.navigate()
 
         //get the recent post list element 
@@ -30,4 +30,3 @@ test.describe('Blog', () => {
 
 
 })
-
